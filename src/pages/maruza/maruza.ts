@@ -1,6 +1,7 @@
 import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { InAppBrowser , InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 
 
@@ -10,13 +11,31 @@ import { HomePage } from '../home/home';
   templateUrl: 'maruza.html',
 })
 export class MaruzaPage {
+  options : InAppBrowserOptions = {
+    location : 'no',//Or 'no' 
+    hidden : 'yes', //Or  'yes'
+    clearcache : 'yes',
+    clearsessioncache : 'yes',
+    zoom : 'yes',//Android only ,shows browser zoom controls 
+    hardwareback : 'yes',
+    mediaPlaybackRequiresUserAction : 'no',
+    shouldPauseOnSuspend : 'no', //Android only 
+    closebuttoncaption : 'Close', //iOS only
+    disallowoverscroll : 'no', //iOS only 
+    toolbar : 'yes', //iOS only 
+    enableViewportScale : 'no', //iOS only 
+    allowInlineMediaPlayback : 'no',//iOS only 
+    presentationstyle : 'pagesheet',//iOS only 
+    fullscreen : 'yes',//Windows only    
+};
   mavzular: any;
   tr : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,private theInAppBrowser: InAppBrowser) {
     this.tr=[
-      1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+     1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
     ]
     this.mavzular=[
+      '1',
       '1-mavzu',
       '2-mavzu',
       '3-mavzu',
@@ -41,6 +60,17 @@ export class MaruzaPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MaruzaPage');
   }
-
+  public openWithCordovaBrowser(url : string){
+    let target = "_self";
+    this.theInAppBrowser.create(url,target,this.options);
+  } 
+  public openWithSystemBrowser(url : string){
+    let target = "_system";
+    this.theInAppBrowser.create(url,target,this.options);
+}
+public openWithInAppBrowser(url : string){
+  let target = "_blank";
+  this.theInAppBrowser.create(url,target,this.options);
+}
 
 }

@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>maruza</ion-title>
+    <ion-title>Ma'ruza</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,6 +10,6 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let tr of tr">{{tr}}</ion-item>
+    <ion-item *ngFor="let tr of tr" (click)="openWithCordovaBrowser('assets/'+'mavzu'+tr+'.htm')">{{mavzular[tr]}}</ion-item>
   </ion-list>
 </ion-content>
